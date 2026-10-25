@@ -1,14 +1,11 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CINEMORA | Movie Collection</title>
-
-  <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
   <style>
     * {
@@ -25,17 +22,15 @@
       overflow-x: hidden;
     }
 
-    /* NAVBAR */
-
     nav {
-      min-height: 82px;
+      min-height: 80px;
       padding: 18px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
-      background: rgba(13, 15, 31, 0.94);
-      border-bottom: 1px solid rgba(149, 116, 255, 0.18);
+      background: rgba(13, 15, 31, 0.96);
+      border-bottom: 1px solid rgba(149, 116, 255, 0.2);
       position: sticky;
       top: 0;
       z-index: 20;
@@ -44,7 +39,7 @@
     }
 
     nav h1 {
-      font-size: clamp(22px, 3vw, 31px);
+      font-size: clamp(23px, 3vw, 32px);
       font-weight: 900;
       letter-spacing: 1px;
       background: linear-gradient(100deg, #fff, #a78bfa, #ec4899);
@@ -73,12 +68,10 @@
       transform: scale(1.12);
     }
 
-    /* SEARCH */
-
-    input {
+    #input {
       display: none;
       width: 230px;
-      padding: 12px 17px;
+      padding: 12px 16px;
       background: #171a30;
       border: 1px solid #51418b;
       border-radius: 12px;
@@ -87,12 +80,12 @@
       font-size: 14px;
     }
 
-    input:focus {
+    #input:focus {
       border-color: #a78bfa;
       box-shadow: 0 0 18px rgba(139, 92, 246, 0.2);
     }
 
-    input::placeholder {
+    #input::placeholder {
       color: #9396b1;
     }
 
@@ -100,14 +93,24 @@
       display: block !important;
     }
 
-    /* MOVIE COLLECTION */
-
     .movie-heading {
       padding: 45px 7% 10px;
     }
 
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #c4b5fd;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
     .movie-heading h2 {
-      font-size: clamp(25px, 4vw, 36px);
+      font-size: clamp(26px, 4vw, 38px);
       margin-bottom: 10px;
       letter-spacing: -0.5px;
     }
@@ -122,94 +125,177 @@
       line-height: 1.7;
     }
 
-    .section-label {
-      display: inline-flex;
+    .collection-bar {
+      padding: 25px 7% 5px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      color: #c4b5fd;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 13px;
+      gap: 15px;
     }
 
-    /* MOVIE CARDS CONTAINER */
+    .collection-bar h3 {
+      font-size: 19px;
+    }
+
+    .collection-bar span {
+      color: #a78bfa;
+      font-size: 13px;
+    }
 
     .movie-container {
       width: 100%;
-      min-height: 50vh;
-      padding: 25px 10% 70px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      padding: 25px 7% 75px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       align-items: stretch;
       gap: 25px;
     }
 
     .movie-card {
-      width: 270px;
-      max-width: 100%;
-      padding: 20px;
+      min-width: 0;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      align-items: stretch;
-      gap: 13px;
-      border: 1px solid #292c48;
-      border-radius: 18px;
-      background: linear-gradient(150deg, #191c33, #101222 75%);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+      gap: 12px;
+      border: 1px solid rgba(167, 139, 250, 0.18);
+      border-radius: 20px;
+      background: linear-gradient(160deg, #1c2038, #101222 75%);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
       overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s,
-        box-shadow 0.3s;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .movie-card:hover {
       transform: translateY(-7px);
-      border-color: #8b5cf6;
-      box-shadow: 0 18px 40px rgba(124, 58, 237, 0.18);
+      border-color: #a78bfa;
+      box-shadow: 0 20px 45px rgba(124, 58, 237, 0.22);
+    }
+
+    .poster-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #22253c;
     }
 
     .movie-poster {
       width: 100%;
-      height: 300px;
+      height: 310px;
       display: block;
       object-fit: cover;
       object-position: center;
-      border-radius: 12px;
-      background: #22253c;
+      border-radius: 14px;
+      transition: transform 0.45s ease;
+    }
+
+    .movie-card:hover .movie-poster {
+      transform: scale(1.05);
+    }
+
+    .poster-top {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .movie-badge {
+      max-width: 65%;
+      padding: 6px 8px;
+      border-radius: 7px;
+      background: linear-gradient(110deg, #7c3aed, #a855f7);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .movie-rating {
+      padding: 6px 8px;
+      border-radius: 7px;
+      background: rgba(8, 10, 22, 0.9);
+      color: #facc15;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    .movie-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 3px 4px 4px;
+    }
+
+    .movie-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      color: #a5a8c3;
+      font-size: 11px;
+    }
+
+    .movie-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .movie-meta i {
+      color: #a78bfa;
     }
 
     .movie-id {
       color: #8589a7;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .movie-name {
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 850;
+      letter-spacing: 0.2px;
+    }
+
+    .movie-description {
+      min-height: 58px;
+      color: #a7abc5;
+      font-size: 12px;
+      line-height: 1.65;
     }
 
     .movie-category {
       align-self: flex-start;
       padding: 6px 10px;
-      border: 1px solid #393154;
-      border-radius: 20px;
-      background: #211d39;
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 8px;
+      background: rgba(124, 58, 237, 0.1);
       color: #c4b5fd;
-      font-size: 12px;
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .add-btn {
       width: 100%;
-      min-height: 43px;
+      min-height: 44px;
       padding: 11px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
       border: none;
-      border-radius: 10px;
+      border-radius: 11px;
       background: linear-gradient(110deg, #7c3aed, #a855f7);
       color: white;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       cursor: pointer;
       transition: 0.25s;
@@ -220,15 +306,23 @@
       box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
     }
 
+    .add-btn:active {
+      transform: scale(0.97);
+    }
+
     .empty-results {
-      width: 100%;
-      padding: 60px 15px;
+      grid-column: 1 / -1;
+      padding: 65px 15px;
       text-align: center;
       color: #a4a7c1;
       font-size: 17px;
+      line-height: 2;
     }
 
-    /* WATCHLIST SIDEBAR */
+    .empty-results i {
+      font-size: 40px;
+      color: #a78bfa;
+    }
 
     #watch {
       width: 390px;
@@ -240,9 +334,6 @@
       z-index: 100;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: stretch;
-      gap: 0;
       background: #111326;
       color: white;
       border-left: 1px solid #393154;
@@ -256,11 +347,11 @@
 
     #watch > h1 {
       width: 100%;
-      padding: 25px 20px !important;
-      background: linear-gradient(120deg, #6d28d9, #a855f7) !important;
-      color: white !important;
+      padding: 25px 20px;
+      background: linear-gradient(120deg, #6d28d9, #a855f7);
+      color: white;
       text-align: center;
-      font-size: 24px;
+      font-size: 23px;
       letter-spacing: 1px;
     }
 
@@ -368,10 +459,6 @@
       color: white;
     }
 
-    #countlist:hover {
-      filter: brightness(1.15);
-    }
-
     #close {
       background: #202238;
       color: #d8ccff;
@@ -382,16 +469,33 @@
       background: #303251;
     }
 
-    /* RESPONSIVE */
+    @media (min-width: 1200px) {
+      .movie-container {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
+      .movie-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 17px;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .movie-poster {
+        height: 270px;
+      }
+    }
+
+    @media (max-width: 650px) {
       nav {
         padding: 16px 5%;
         gap: 10px;
       }
 
       nav h1 {
-        font-size: 21px;
+        font-size: 22px;
         letter-spacing: 0;
       }
 
@@ -400,7 +504,7 @@
         font-size: 21px;
       }
 
-      input {
+      #input {
         position: absolute;
         top: 75px;
         right: 15px;
@@ -413,17 +517,40 @@
       }
 
       .movie-container {
-        padding: 20px 5% 45px;
-        justify-content: center;
-        gap: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: 20px 4% 45px;
       }
 
       .movie-card {
-        width: min(100%, 320px);
+        padding: 9px;
+        border-radius: 15px;
       }
 
       .movie-poster {
-        height: 300px;
+        height: 235px;
+      }
+
+      .movie-name {
+        font-size: 15px;
+      }
+
+      .movie-description {
+        font-size: 11px;
+      }
+
+      .movie-badge {
+        font-size: 8px;
+        padding: 5px 6px;
+      }
+
+      .movie-rating {
+        font-size: 10px;
+        padding: 5px 6px;
+      }
+
+      .movie-category {
+        font-size: 10px;
       }
 
       #watch {
@@ -445,6 +572,20 @@
         gap: 10px;
         font-size: 19px;
       }
+
+      .movie-container {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .movie-card {
+        width: 100%;
+        max-width: 300px;
+        justify-self: center;
+      }
+
+      .movie-poster {
+        height: 320px;
+      }
     }
   </style>
 </head>
@@ -452,7 +593,6 @@
 <body>
   <nav>
     <h1>CINEMORA</h1>
-
     <div id="icon">
       <i class="ri-search-2-line" id="search"></i>
       <input type="text" placeholder="Search movies..." id="input" />
@@ -466,17 +606,17 @@
       YOUR CINEMA COLLECTION
     </div>
     <h2>Discover your next <span>favorite.</span></h2>
-    <p>Explore movies and build your personal watchlist.</p>
+    <p>Explore movies, discover top-rated films and build your personal watchlist.</p>
   </section>
 
+  <div class="collection-bar">
+    <h3><i class="ri-movie-2-line"></i> All Movies</h3>
+    <span id="movie-count">15 movies available</span>
+  </div>
+
   <div id="watch">
-    <h1>
-      <i class="ri-bookmark-3-line"></i>
-      My Watchlist
-    </h1>
-
+    <h1><i class="ri-bookmark-3-line"></i> My Watchlist</h1>
     <div id="items"></div>
-
     <div class="btnswatch">
       <button id="countlist">Total: 0</button>
       <button id="close">Close</button>
@@ -484,235 +624,362 @@
   </div>
 
   <script>
-    let icon = document.getElementById("icon");
-    let items = document.getElementById("items");
-    let countlist = document.getElementById("countlist");
+    const items = document.getElementById("items");
+    const countlist = document.getElementById("countlist");
+    const watch = document.getElementById("watch");
+    const input = document.getElementById("input");
+    const movieCount = document.getElementById("movie-count");
 
-    let close = document
-      .getElementById("close")
-      .addEventListener("click", () => {
-        watch.classList.remove("watchshow");
-      });
-
-    let watch = document.getElementById("watch");
-    let input = document.getElementById("input");
-    let watchmenu = document.getElementById("watchmenu");
-
-    watchmenu.addEventListener("click", () => {
-      watch.classList.toggle("watchshow");
-    });
-
-    let search = document
-      .getElementById("search")
-      .addEventListener("click", () => {
-        input.classList.toggle("input");
-      });
-
-      
-let movies = [
-  {
-    id: 1,
-    name: "LEO",
-    category: "Action",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyoEonIMX8lz5RbH67T89Dyz8qnB3k-GCgqD8ay0i0Xg&s=10",
-  },
-  {
-    id: 2,
-    name: "GOAT",
-    category: "Action",
-    image:
-      "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTaEKaHp3bBNYG1kdLNH4KTAOvprUuxUvvLdxy5bhAlN9wWEpZg",
-  },
-  {
-    id: 3,
-    name: "LOVE TODAY",
-    category: "Comedy",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ_1v0b4a4H3BTpcxVO_4Eb2jwyHA07O7uiD14y70h1A&s",
-  },
-  {
-    id: 4,
-    name: "INTERSTELLAR",
-    category: "Sci-Fi",
-    image:
-      "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
-  },
-  {
-    id: 5,
-    name: "AVENGERS: ENDGAME",
-    category: "Superhero",
-    image:
-      "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
-  },
-  {
-    id: 6,
-    name: "SPIDER-MAN: NO WAY HOME",
-    category: "Superhero",
-    image:
-      "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-  },
-  {
-    id: 7,
-    name: "THE BATMAN",
-    category: "Action",
-    image:
-      "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
-  },
-  {
-    id: 8,
-    name: "INCEPTION",
-    category: "Thriller",
-    image:
-      "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
-  },
-];
-
-
-      let par = document.createElement("div");
-    par.className = "movie-container";
-
-    document.body.append(par);
+    const movies = [
+    {
+  id: 1,
+  name: "AVENGERS: INFINITY WAR",
+  category: "Superhero",
+  image: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+  rating: "8.4",
+  year: "2018",
+  duration: "2h 29m",
+  description: "The Avengers unite to stop Thanos from collecting the Infinity Stones.",
+  badge: "MUST WATCH"
+},
+      {
+        id: 2,
+        name: "INTERSTELLAR",
+        category: "Sci-Fi",
+        image: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+        rating: "8.7",
+        year: "2014",
+        duration: "2h 49m",
+        description: "Explorers travel through a wormhole in search of humanity's future.",
+        badge: "POPULAR"
+      },
+      {
+        id: 3,
+        name: "INCEPTION",
+        category: "Thriller",
+        image: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
+        rating: "8.8",
+        year: "2010",
+        duration: "2h 28m",
+        description: "A skilled thief enters dreams to steal secrets and attempt the impossible.",
+        badge: "MUST WATCH"
+      },
+      {
+        id: 4,
+        name: "AVENGERS: ENDGAME",
+        category: "Superhero",
+        image: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+        rating: "8.4",
+        year: "2019",
+        duration: "3h 1m",
+        description: "The Avengers unite for one final mission to restore the universe.",
+        badge: "BLOCKBUSTER"
+      },
+      {
+        id: 5,
+        name: "SPIDER-MAN: NO WAY HOME",
+        category: "Superhero",
+        image: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+        rating: "8.2",
+        year: "2021",
+        duration: "2h 28m",
+        description: "Peter Parker faces unexpected visitors after his identity is revealed.",
+        badge: "FAN FAVOURITE"
+      },
+      {
+        id: 6,
+        name: "THE BATMAN",
+        category: "Crime",
+        image: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+        rating: "7.8",
+        year: "2022",
+        duration: "2h 56m",
+        description: "Batman investigates a series of crimes hidden within Gotham City.",
+        badge: "DARK THRILLER"
+      },
+      {
+        id: 7,
+        name: "DUNE",
+        category: "Sci-Fi",
+        image: "https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg",
+        rating: "8.0",
+        year: "2021",
+        duration: "2h 35m",
+        description: "A young heir journeys to a desert planet filled with danger and destiny.",
+        badge: "EPIC"
+      },
+      {
+        id: 8,
+        name: "OPPENHEIMER",
+        category: "Drama",
+        image: "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",
+        rating: "8.3",
+        year: "2023",
+        duration: "3h",
+        description: "The story of the scientist whose work changed the course of history.",
+        badge: "AWARD WINNER"
+      },
+      {
+        id: 9,
+        name: "TOP GUN: MAVERICK",
+        category: "Action",
+        image: "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+        rating: "8.2",
+        year: "2022",
+        duration: "2h 10m",
+        description: "A legendary pilot trains a new generation for a dangerous mission.",
+        badge: "TOP RATED"
+      },
+      {
+        id: 10,
+        name: "JOKER",
+        category: "Crime",
+        image: "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+        rating: "8.1",
+        year: "2019",
+        duration: "2h 2m",
+        description: "A troubled comedian slowly transforms amid a city in chaos.",
+        badge: "PSYCHOLOGICAL"
+      },
+      {
+        id: 11,
+        name: "GUARDIANS OF THE GALAXY",
+        category: "Adventure",
+        image: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
+        rating: "8.0",
+        year: "2014",
+        duration: "2h 1m",
+        description: "An unlikely group of space adventurers joins forces to save the galaxy.",
+        badge: "FAN FAVOURITE"
+      },
+      {
+        id: 12,
+        name: "DOCTOR STRANGE",
+        category: "Fantasy",
+        image: "https://image.tmdb.org/t/p/w500/uGBVj3bEbCoZbDjjl9wTxcygko1.jpg",
+        rating: "7.5",
+        year: "2016",
+        duration: "1h 55m",
+        description: "A surgeon discovers mysterious powers beyond the world he knows.",
+        badge: "MAGICAL"
+      },
+      {
+        id: 13,
+        name: "THE DARK KNIGHT",
+        category: "Action",
+        image: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        rating: "9.0",
+        year: "2008",
+        duration: "2h 32m",
+        description: "Batman confronts a dangerous criminal who throws Gotham into chaos.",
+        badge: "CLASSIC"
+      },
+      {
+        id: 14,
+        name: "AVATAR: THE WAY OF WATER",
+        category: "Fantasy",
+        image: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+        rating: "7.5",
+        year: "2022",
+        duration: "3h 12m",
+        description: "Jake and Neytiri protect their family in the oceans of Pandora.",
+        badge: "VISUAL EPIC"
+      },
+      {
+        id: 15,
+        name: "THE MARVELS",
+        category: "Superhero",
+        image: "https://image.tmdb.org/t/p/w500/9GBhzXMFjgcZ3FdR9w3bUMMTps5.jpg",
+        rating: "5.5",
+        year: "2023",
+        duration: "1h 45m",
+        description: "Three heroes discover their powers are mysteriously connected.",
+        badge: "MARVEL"
+      }
+    ];
 
     let watcharr = [];
 
-    function main(item) {
-      par.innerHTML = "";
+    document.getElementById("close").addEventListener("click", () => {
+      watch.classList.remove("watchshow");
+    });
 
-      if (item.length === 0) {
-        let empty = document.createElement("div");
+    document.getElementById("watchmenu").addEventListener("click", () => {
+      watch.classList.toggle("watchshow");
+    });
+
+    document.getElementById("search").addEventListener("click", () => {
+      input.classList.toggle("input");
+
+      if (input.classList.contains("input")) {
+        input.focus();
+      } else {
+        input.value = "";
+        main(movies);
+      }
+    });
+
+    function main(movieList) {
+      const par = document.getElementById("movie-list");
+
+      par.innerHTML = "";
+      movieCount.textContent = movieList.length + (movieList.length === 1 ? " movie found" : " movies found");
+
+      if (movieList.length === 0) {
+        const empty = document.createElement("div");
         empty.className = "empty-results";
-        empty.innerHTML =
-          '<i class="ri-search-eye-line"></i><br>No movies found. Try another search.';
+        empty.innerHTML = '<i class="ri-search-eye-line"></i><br>No movies found. Try another search.';
         par.append(empty);
         return;
       }
 
-      item.forEach((k) => {
-        let div = document.createElement("div");
+      movieList.forEach((k) => {
+        const div = document.createElement("div");
         div.className = "movie-card";
 
-        let h1 = document.createElement("h2");
-        h1.className = "movie-name";
-        h1.innerHTML = k.name;
+        const posterWrapper = document.createElement("div");
+        posterWrapper.className = "poster-wrapper";
 
-        let img1 = document.createElement("img");
+        const img1 = document.createElement("img");
         img1.src = k.image;
         img1.alt = k.name + " movie poster";
         img1.className = "movie-poster";
+        img1.loading = "lazy";
 
-        let p1 = document.createElement("p");
-        p1.className = "movie-id";
-        p1.innerHTML = "MOVIE ID · " + k.id;
+        img1.onerror = () => {
+          img1.onerror = null;
+          img1.src = "https://placehold.co/500x750/171a30/a78bfa?text=" + encodeURIComponent(k.name);
+        };
 
-        let h6 = document.createElement("h4");
-        h6.className = "movie-category";
-        h6.innerHTML = '<i class="ri-film-line"></i> ' + k.category;
+        const posterTop = document.createElement("div");
+        posterTop.className = "poster-top";
 
-        let btn = document.createElement("button");
+        const badge = document.createElement("span");
+        badge.className = "movie-badge";
+        badge.textContent = k.badge;
+
+        const rating = document.createElement("span");
+        rating.className = "movie-rating";
+        rating.innerHTML = '<i class="ri-star-fill"></i> ' + k.rating;
+
+        posterTop.append(badge, rating);
+        posterWrapper.append(img1, posterTop);
+
+        const info = document.createElement("div");
+        info.className = "movie-info";
+
+        const meta = document.createElement("div");
+        meta.className = "movie-meta";
+
+        const year = document.createElement("span");
+        year.innerHTML = '<i class="ri-calendar-line"></i> ' + k.year;
+
+        const duration = document.createElement("span");
+        duration.innerHTML = '<i class="ri-time-line"></i> ' + k.duration;
+
+        meta.append(year, duration);
+
+        const id = document.createElement("p");
+        id.className = "movie-id";
+        id.textContent = "MOVIE ID · " + k.id;
+
+        const h1 = document.createElement("h2");
+        h1.className = "movie-name";
+        h1.textContent = k.name;
+
+        const description = document.createElement("p");
+        description.className = "movie-description";
+        description.textContent = k.description;
+
+        const category = document.createElement("span");
+        category.className = "movie-category";
+        category.innerHTML = '<i class="ri-film-line"></i> ' + k.category;
+
+        const btn = document.createElement("button");
         btn.className = "add-btn";
-        btn.innerHTML =
-          '<i class="ri-bookmark-line"></i> Add to Watchlist';
+        btn.innerHTML = '<i class="ri-bookmark-line"></i> Add to Watchlist';
 
         btn.addEventListener("click", () => {
-          let exist = watcharr.find((i) => i.id === k.id);
+          const exist = watcharr.find((i) => i.id === k.id);
 
           if (exist) {
-            alert("The movie is Already in watchlist");
+            alert("This movie is already in your watchlist.");
           } else {
             watcharr.push({
               id: k.id,
               name: k.name,
               image: k.image,
               category: k.category,
-              watch: 1,
+              watch: 1
             });
           }
 
           watchfunc();
         });
 
-        div.append(img1, p1, h1, h6, btn);
+        info.append(meta, id, h1, description, category, btn);
+        div.append(posterWrapper, info);
         par.append(div);
       });
     }
 
-    main(movies);
-
     input.addEventListener("input", () => {
-      let check = input.value.toLowerCase();
-      let filter = movies.filter((g) =>
-        g.name.toLowerCase().includes(check)
+      const check = input.value.toLowerCase().trim();
+
+      const filteredMovies = movies.filter((movie) =>
+        movie.name.toLowerCase().includes(check) ||
+        movie.category.toLowerCase().includes(check) ||
+        movie.description.toLowerCase().includes(check)
       );
 
-      main(filter);
+      main(filteredMovies);
     });
 
     function watchfunc() {
       items.innerHTML = "";
 
       watcharr.forEach((o) => {
-        let div2 = document.createElement("div");
+        const div2 = document.createElement("div");
         div2.className = "watch-item";
 
-        let img11 = document.createElement("img");
+        const img11 = document.createElement("img");
         img11.src = o.image;
         img11.alt = o.name;
         img11.className = "watch-poster";
+        img11.onerror = () => {
+          img11.onerror = null;
+          img11.src = "https://placehold.co/100x150/171a30/a78bfa?text=Movie";
+        };
 
-        let details = document.createElement("div");
+        const details = document.createElement("div");
         details.className = "watch-details";
 
-        let h11 = document.createElement("h6");
+        const h11 = document.createElement("h6");
         h11.className = "watch-name";
-        h11.innerHTML = o.name;
+        h11.textContent = o.name;
 
-        let h61 = document.createElement("p");
+        const h61 = document.createElement("p");
         h61.className = "watch-category";
-        h61.innerHTML = o.category;
+        h61.textContent = o.category;
 
         details.append(h11, h61);
 
-        let btn1 = document.createElement("button");
-        btn1.className = "quantity-btn";
-        btn1.innerHTML = "-";
 
-        btn1.addEventListener("click", () => {
-          o.watch--;
-
-          if (o.watch <= 0) {
-            watcharr = watcharr.filter((u) => u.id !== o.id);
-          }
-
-          watchfunc();
-        });
-
-        let watchtimes = document.createElement("p");
-        watchtimes.className = "quantity-number";
-        watchtimes.innerHTML = o.watch;
-
-        let btn2 = document.createElement("button");
-        btn2.className = "quantity-btn";
-        btn2.innerHTML = "+";
-
-        btn2.addEventListener("click", () => {
-          o.watch++;
-          watchfunc();
-        });
-
-        div2.append(
-          img11,
-          details,
-          btn1,
-          watchtimes,
-          btn2
-        );
-
+        div2.append(img11, details);
         items.append(div2);
       });
 
-      countlist.innerHTML = "Total: " + watcharr.length;
+      const total = watcharr.reduce((sum, movie) => sum + movie.watch, 0);
+      countlist.textContent = "Total: " + total;
     }
+
+    const movieList = document.createElement("div");
+    movieList.id = "movie-list";
+    movieList.className = "movie-container";
+    document.body.insertBefore(movieList, document.getElementById("watch"));
+
+    main(movies);
+    watchfunc();
   </script>
 </body>
 </html>
